@@ -12,6 +12,8 @@ import {
 } from './auth.js';
 
 const DEMO_PASSWORD = 'panda1234';
+// A senha de demonstração só vale fora de produção e sem GitHub configurado.
+const demoAllowed = (store) => store.kind === 'memory' && process.env.VERCEL_ENV !== 'production';
 
 function send(res, status, body, headers = {}) {
   res.statusCode = status;
@@ -189,7 +191,7 @@ export async function handle(req, res) {
           user: admin ? { email: admin.email, name: admin.name } : null,
           mode: store.kind,
           firstAccess: d.admins.length === 0,
-          demoHint: store.kind === 'memory' ? { email: process.env.ADMIN_EMAIL || 'admin@canecariapanda.com.br', password: DEMO_PASSWORD } : null,
+          demoHint: demoAllowed(store) ? { email: process.env.ADMIN_EMAIL || 'admin@canecariapanda.com.br', password: DEMO_PASSWORD } : null,
         });
       }
       if (parts[1] === 'login' && method === 'POST') {
@@ -201,7 +203,7 @@ export async function handle(req, res) {
         const admin = await store.transaction(['admins'], (d) => {
           if (d.admins.length === 0) {
             const firstEmail = (process.env.ADMIN_EMAIL || 'admin@canecariapanda.com.br').toLowerCase();
-            const firstPassword = process.env.ADMIN_PASSWORD || (store.kind === 'memory' ? DEMO_PASSWORD : '');
+            const firstPassword = process.env.ADMIN_PASSWORD || (demoAllowed(store) ? DEMO_PASSWORD : '');
             if (!firstPassword) throw new StoreError('Primeiro acesso: cadastre a variável ADMIN_PASSWORD na Vercel e publique de novo.', 503);
             if (email !== firstEmail || password !== firstPassword) return null;
             const a = { email, name: 'Administrador', ...hashPassword(password), createdAt: now() };

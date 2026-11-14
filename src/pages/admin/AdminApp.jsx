@@ -54,7 +54,7 @@ function Login({ info, onLogin }) {
         <PandaMark size={64} />
         <h1 className="mt-4 text-4xl font-extrabold">Painel da loja</h1>
         <p className="mt-1 text-muted">Entre com o e-mail e a senha da equipe.</p>
-        {info?.firstAccess && info.mode === 'github' ? (
+        {info?.firstAccess && !info.demoHint ? (
           <Notice tone="info" className="mt-5">Primeiro acesso: use o e-mail de ADMIN_EMAIL e a senha de ADMIN_PASSWORD cadastrados na Vercel. Depois troque a senha em Configurações.</Notice>
         ) : null}
         {info?.demoHint ? (
