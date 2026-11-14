@@ -15,8 +15,8 @@ export function PandaMark({ size = 40, className = '' }) {
       <circle cx="40.5" cy="32.5" r="2.2" fill="#fff" />
       <ellipse cx="32" cy="43" rx="3.6" ry="2.6" fill={INK} />
       <path d="M28.5 47.5 Q32 50.5 35.5 47.5" fill="none" stroke={INK} strokeWidth="2.2" strokeLinecap="round" />
-      <ellipse cx="17" cy="44" rx="3.2" ry="2" fill="#F26B1D" opacity=".85" />
-      <ellipse cx="47" cy="44" rx="3.2" ry="2" fill="#F26B1D" opacity=".85" />
+      <ellipse cx="17" cy="44" rx="3.2" ry="2" fill="#f97316" opacity=".85" />
+      <ellipse cx="47" cy="44" rx="3.2" ry="2" fill="#f97316" opacity=".85" />
     </svg>
   );
 }
@@ -69,7 +69,7 @@ export function Mug({ color = '#ffffff', accent = '', text = '', className = '',
         </text>
       ) : null}
       <g transform={`translate(${184 - 13} ${lines.length ? 214 + ((lines.length - 1) * size) / 2 : 172})`}>
-        <path d="M13 24 C-4 12 2 -1 13 7 C24 -1 30 12 13 24 Z" fill="#F26B1D" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
+        <path d="M13 24 C-4 12 2 -1 13 7 C24 -1 30 12 13 24 Z" fill="#f97316" stroke={INK} strokeWidth="2.5" strokeLinejoin="round" />
       </g>
     </svg>
   );
@@ -105,7 +105,7 @@ function Frame({ color }) {
       <rect x="95" y="55" width="210" height="250" rx="8" fill="#8a5a33" stroke={INK} strokeWidth="6" />
       <rect x="118" y="78" width="164" height="204" rx="4" fill={color} stroke={INK} strokeWidth="4" />
       <path d="M128 262 L175 200 L205 235 L230 210 L272 262 Z" fill="#2f7d32" stroke={INK} strokeWidth="4" strokeLinejoin="round" />
-      <circle cx="245" cy="122" r="16" fill="#F26B1D" stroke={INK} strokeWidth="4" />
+      <circle cx="245" cy="122" r="16" fill="#f97316" stroke={INK} strokeWidth="4" />
     </g>
   );
 }
@@ -153,7 +153,7 @@ function Box({ color }) {
     <g>
       <rect x="90" y="110" width="220" height="190" rx="10" fill={color} stroke={INK} strokeWidth="6" />
       <rect x="80" y="85" width="240" height="45" rx="8" fill={color} stroke={INK} strokeWidth="6" />
-      <path d="M200 85 L200 300" stroke="#F26B1D" strokeWidth="16" />
+      <path d="M200 85 L200 300" stroke="#f97316" strokeWidth="16" />
     </g>
   );
 }

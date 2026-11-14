@@ -7,8 +7,8 @@ import { money, whatsappLink } from '../../lib/format.js';
 
 const COLORS = [
   ['Branca', '#ffffff'],
-  ['Laranja', '#F26B1D'],
-  ['Verde bambu', '#2F7D32'],
+  ['Laranja', '#f97316'],
+  ['Verde bambu', '#16a34a'],
   ['Preta', '#1d1d1d'],
   ['Rosa', '#F49AC1'],
   ['Azul', '#3B82C4'],

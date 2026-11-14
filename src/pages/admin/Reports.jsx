@@ -30,9 +30,9 @@ function BarChart({ points, format = money, label }) {
     <figure className="relative">
       <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={label}>
         {[0.25, 0.5, 0.75, 1].map((g) => (
-          <line key={g} x1={pad.l} x2={W - pad.r} y1={pad.t + (H - pad.t - pad.b) * (1 - g)} y2={pad.t + (H - pad.t - pad.b) * (1 - g)} stroke="#d6dad0" strokeDasharray="2 4" />
+          <line key={g} x1={pad.l} x2={W - pad.r} y1={pad.t + (H - pad.t - pad.b) * (1 - g)} y2={pad.t + (H - pad.t - pad.b) * (1 - g)} stroke="#e5e7eb" strokeDasharray="2 4" />
         ))}
-        <line x1={pad.l} x2={W - pad.r} y1={H - pad.b} y2={H - pad.b} stroke="#5b6157" />
+        <line x1={pad.l} x2={W - pad.r} y1={H - pad.b} y2={H - pad.b} stroke="#6b7280" />
         {points.map((p, i) => {
           const h = ((H - pad.t - pad.b) * p.value) / max;
           const x = pad.l + i * bw;
@@ -41,9 +41,9 @@ function BarChart({ points, format = money, label }) {
               <rect x={x} y={pad.t} width={bw} height={H - pad.t - pad.b} fill="transparent" />
               {p.value > 0 ? (
                 <path d={`M${x + 1} ${H - pad.b} V${H - pad.b - h + 4} q0 -4 4 -4 H${x + bw - 5} q4 0 4 4 V${H - pad.b} Z`}
-                  fill={hover === i ? '#c9520e' : '#f26b1d'} />
+                  fill={hover === i ? '#ea580c' : '#f97316'} />
               ) : null}
-              {i % every === 0 ? <text x={x + bw / 2} y={H - 8} textAnchor="middle" fontSize="11" fill="#5b6157">{p.short}</text> : null}
+              {i % every === 0 ? <text x={x + bw / 2} y={H - 8} textAnchor="middle" fontSize="11" fill="#6b7280">{p.short}</text> : null}
             </g>
           );
         })}
