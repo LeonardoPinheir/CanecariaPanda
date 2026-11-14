@@ -1,9 +1,6 @@
 // Armazenamento dos dados da loja.
 //
-// Principal: Supabase (Postgres), quando SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY
-// estão configurados. Ver server/supabase.js e supabase/schema.sql.
-//
-// Alternativa: arquivos JSON na branch de dados (padrão "dados") do repositório
+// Produção: arquivos JSON na branch de dados (padrão "dados") do repositório
 // GitHub configurado em GITHUB_REPO, gravados com commits atômicos pela API
 // Git Data do GitHub. Se dois pedidos gravarem ao mesmo tempo, a gravação
 // perdedora é refeita sobre os dados mais novos.
@@ -12,7 +9,6 @@
 // partindo do catálogo de exemplo — nada é salvo de verdade.
 
 import { seedData } from './seed.js';
-import { SupabaseDriver } from './supabase.js';
 
 export const COLLECTIONS = [
   'settings', 'categories', 'products', 'customers', 'orders',
@@ -214,13 +210,11 @@ class GitHubDriver {
 let driver;
 export function getStore() {
   if (!driver) {
-    const sbUrl = process.env.SUPABASE_URL;
-    const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SECRET_KEY;
     const token = process.env.GITHUB_TOKEN;
     const repo = process.env.GITHUB_REPO;
-    if (sbUrl && sbKey) driver = new SupabaseDriver({ url: sbUrl, key: sbKey, seed: seedData, StoreError });
-    else if (token && repo) driver = new GitHubDriver({ token, repo, branch: process.env.DATA_BRANCH || 'dados' });
-    else driver = new MemoryDriver();
+    driver = token && repo
+      ? new GitHubDriver({ token, repo, branch: process.env.DATA_BRANCH || 'dados' })
+      : new MemoryDriver();
   }
   return driver;
 }
